@@ -24,8 +24,9 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
         NSForegroundColorAttributeName : UIColor.whiteColor(),
+       // NSBackgroundColorAttributeName : UIColor.clearColor(),
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName : 3.0
+        NSStrokeWidthAttributeName : -3.0
     ]
     
     override func viewWillAppear(animated: Bool) {
@@ -35,21 +36,23 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        self.topText.text = "Top"
-//        self.topText.layer.zPosition=10
-        self.topText.textAlignment =  NSTextAlignment.Center
-        self.topText.defaultTextAttributes = self.memeTextAttributes
-        self.topText.delegate = self
+        topText.text = "Top"
+        topText.backgroundColor = UIColor.clearColor()
+        topText.delegate = self
+        topText.borderStyle = .None
+        topText.defaultTextAttributes = self.memeTextAttributes
+        topText.textAlignment = .Center
         
-        self.bottomText.text = "Bottom"
-//        self.bottomText.layer.zPosition=10
-        self.bottomText.textAlignment =  NSTextAlignment.Center
-        self.bottomText.defaultTextAttributes = self.memeTextAttributes
-        self.bottomText.delegate = self
+        bottomText.text = "Bottom"
+        bottomText.delegate = self
+        bottomText.backgroundColor = UIColor.clearColor()
+        bottomText.borderStyle = .None
+        bottomText.defaultTextAttributes = self.memeTextAttributes
+        bottomText.textAlignment = .Center
     }
     
     func textFieldDidBeginEditing(textField: UITextField){
-        if(textField.text ==  "top" || textField.text == "bottom"){
+        if((textField == topText && textField.text?.uppercaseString ==  "TOP" ) || (textField == bottomText && textField.text?.uppercaseString == "BOTTOM")){
             textField.text = ""
         }
     }
